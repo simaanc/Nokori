@@ -1,11 +1,18 @@
+// App.tsx
+import React from 'react';
+import { View, useColorScheme, StyleSheet } from 'react-native';
+import MainNavigator from './src/navigation/MainNavigator';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { lightTheme, darkTheme } from './src/theme/styles';
 
 export default function App() {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'light' ? lightTheme : darkTheme;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={[styles.container, theme.container]}>
+      <StatusBar style={colorScheme === 'light' ? 'dark' : 'light'} />
+      <MainNavigator />
     </View>
   );
 }
@@ -13,8 +20,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
